@@ -23,15 +23,54 @@ dataSet = dataSet.drop(columns=["MAL_ID", "English name", "Japanese name", "Aire
                                 "Score-4", "Score-3", "Score-2", "Score-1"])
 
 index_names = dataSet[(dataSet["Score"] == "Unknown")].index
-dataSet.drop(index_names, inplace = True)
+dataSet.drop(index_names, inplace=True)
 
 dataSet["Score"] = dataSet["Score"].astype(str).astype(float)
+
+dataSet.to_csv('test.csv')
+
+# TOP 99
+top_99 = dataSet[(dataSet["Score"] < 8.52)].index
+
+dataSet_T100 = dataSet.drop(top_99, inplace=True)
+
+# dataSet_T100.to_csv('test_top100.csv')
+
+
+# BOT 99
+bot_99 = dataSet[(dataSet["Score"] < 4.31)].index
+# dataSet_B100 = dataSet.drop(bot_99, inplace=True)
+
+bot_99.to_csv('test_bot100.csv')
+
+
+# TOP 100 Anime vs Bottom Anime
+
+# bar_chart for just genres or studios
+
+# scatter of score vs genre
+
+# scatter of score vs studio
+
+# index_names = dataSet[(dataSet["Score"] )].index
+# dataSet.drop(index_names, inplace=True)
+
+
+studios = set()
+print(len(set([x.lower() for x in dataSet['Studios']])))
+
+
+# plt.scatter(xList, labels, color = 'b')
+# plt.xlabel("years of education")
+# plt.ylabel("salary (in K$)")
+# plt.show()
+
+
 
 
 # Figure out how to delete rows with unknown score values
 
 print(dataSet)
-
 
 # xList = []
 # labels = []
