@@ -29,31 +29,36 @@ dataSet["Score"] = dataSet["Score"].astype(str).astype(float)
 
 dataSet.to_csv('test.csv')
 
-# TOP 99
-top_99 = dataSet[(dataSet["Score"] < 8.52)].index
+# TOP 100 from the bottom and the top
+top100 = dataSet.nlargest(100, ['Score'])
+bot100 = dataSet = dataSet.nsmallest(100, ['Score'])
 
-dataSet_T100 = dataSet.drop(top_99, inplace=True)
+# top100.to_csv('test_top100.csv')
+# bot100.to_csv('test_bot100.csv')
 
-# dataSet_T100.to_csv('test_top100.csv')
 
 
-# BOT 99
-bot_99 = dataSet[(dataSet["Score"] < 4.31)].index
-# dataSet_B100 = dataSet.drop(bot_99, inplace=True)
+w=0.4
+x = ["Testing"]
 
-bot_99.to_csv('test_bot100.csv')
+topx = top100["Genres"]
+botx = bot100["Genres"]
+
+
 
 
 # TOP 100 Anime vs Bottom Anime
 
-# bar_chart for just genres or studios
+# bar_chart for just genres
+
+# bar_chart for just studios
 
 # scatter of score vs genre
 
 # scatter of score vs studio
 
-# index_names = dataSet[(dataSet["Score"] )].index
-# dataSet.drop(index_names, inplace=True)
+# scatter with TOP100(blue plots) vs BOT100(red plots) in a studio
+
 
 
 studios = set()
