@@ -80,7 +80,7 @@ dataSet.describe()
 top100 = dataSet.nlargest(100, ['Score'])
 
 # TOP 100 from the bottom
-bot100 = dataSet = dataSet.nsmallest(100, ['Score'])
+bot100 = dataSet.nsmallest(100, ['Score'])
 
 # Checking for outliers > relationship analysis
 
@@ -127,5 +127,5 @@ sns.displot(top100["Popularity"],bins = 5)
 
 sns.displot(bot100["Popularity"], bins = 5)
 
-sns.catplot(x="Type", kind= "")
+# sns.catplot(x="Type", kind= "")
 
