@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Final Project ML
 
 Shriji Shah (100665031)
@@ -131,11 +130,7 @@ plots()
 ## First Algorithm - Polynomial Regression
 """
 
-
-
-
-
-
+#Store each algorithm in a function
 def polynomial():
     droppedSet = top2000.copy()
 
@@ -176,7 +171,7 @@ def polynomial():
 
 """## Second Algorithm - Ridge Lasso"""
 
-
+#Lasso function
 def lasso():
     # Setting the training and testing data
     trainData, testData = train_test_split(top2000, test_size=0.5)
@@ -254,7 +249,7 @@ validation set """
 
 top2000.head()
 
-train, test = train_test_split(sal_data, test_size=0.5)  # , random_state=11)
+train, test = train_test_split(sal_data, test_size = 0.5)  # , random_state=11)
 
 
 def create_ids(df):
@@ -366,6 +361,7 @@ train
 
 tf.convert_to_tensor(train_data)
 
+#Fit to model
 history = model.fit(
     tf.convert_to_tensor(train_data),
     train_labels_mc, batch_size=10,
@@ -374,6 +370,7 @@ history = model.fit(
     validation_data=(test_data, test_labels_mc),
     verbose=1)  # Turn verbose=1 (default) for printing epochs
 
+#Generate and display the model
 pd.DataFrame(history.history).plot(figsize=(8, 5))
 plt.grid(True)
 plt.gca().set_ylim(0, 5)
@@ -405,6 +402,7 @@ plt.title('mae Comparisons')
 # plt.grid(True)
 # plt.legend([mae], ['mae'])
 
+#Display and show all the plots for the end results
 predict = model.predict(test_data)
 
 print(predict)
