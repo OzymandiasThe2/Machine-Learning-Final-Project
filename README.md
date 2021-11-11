@@ -1,4 +1,4 @@
-# machine_learning_final_project
+# Machine Learning Final Project
 Repo for storing machine learning data file
 
 
