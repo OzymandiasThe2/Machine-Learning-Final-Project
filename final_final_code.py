@@ -299,6 +299,10 @@ train_data
 
 train_labels
 
+plt.figure(figsize=(8,8))
+sns.heatmap(test_data.corr(), annot=True, cmap="coolwarm")
+
+
 """Scale as usual:"""
 
 scaler = StandardScaler()
@@ -411,6 +415,20 @@ plt.ylabel('Score')
 
 plt.grid(True)
 plt.gca().set_ylim(0, 10)
+plt.show()
+
+
+x = test["Type"]
+y = test["Popularity"]
+plt.figure(figsize=(20, 5))
+
+plt.bar(x, y)
+plt.title('Anime Type by Popularity')
+plt.xlabel('Type')
+plt.ylabel('Popularity')
+
+plt.grid(True)
+plt.gca().set_ylim(0, 12000)
 plt.show()
 
 y = test["Score"]
