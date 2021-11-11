@@ -12,19 +12,22 @@ Original file is located at
 """
 
 # Imports
+import seaborn as sns
+import tensorflow as tf
+from sklearn.preprocessing import StandardScaler
+from tensorflow import keras
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import seaborn as sns
-import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn import linear_model
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Lasso
 from sklearn.linear_model import Ridge
-from sklearn.metrics import mean_squared_error
-from tensorflow import keras
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import operator
+
 
 data = pd.read_csv(
     'https://raw.githubusercontent.com/OzymandiasThe2/machine_learning_final_project/main/anime.csv')
@@ -129,11 +132,11 @@ plots()
 """
 
 
+
+
+
+
 def polynomial():
-    dataSet.describe()
-
-    dataSet.head()
-
     droppedSet = top2000.copy()
 
     poorModel = linear_model.LinearRegression()
@@ -148,25 +151,27 @@ def polynomial():
     plt.xlabel("Ranked")
     plt.ylabel("Score")
 
-    # Plotting the poor model
-    model_features = PolynomialFeatures(degree=2, include_bias=False)
-    # Setting the parameters for the axis
-    # plt.xticks(np.arange(min(x), max(x) + 1, 1.0))
-    # plt.xticks(np.arange(0, 26, 2.5))
+    polynomial_features = PolynomialFeatures(degree=2)
+    x_poly = polynomial_features.fit_transform(x)
 
-    # Fit graph to x axis data
-    xPoly = model_features.fit_transform(x)
-    # Graph as a linear regression
-    linRegression = linear_model.LinearRegression()
-    linRegression.fit(xPoly, y)
+    model = LinearRegression()
+    model.fit(x_poly, y)
+    y_poly_pred = model.predict(x_poly)
 
-    # Adapt data to linear regression line
-    newX = np.linspace(0, 25, 100).reshape(100, 1)
-    newPolyx = model_features.transform(newX)
-    newY = linRegression.predict(newPolyx)
+    rmse = np.sqrt(mean_squared_error(y, y_poly_pred))
+    r2 = r2_score(y, y_poly_pred)
+    print("RMSE = ", rmse)
+    print("R2 = ", r2)
+
+    plt.scatter(x, y, s=10)
+    # sort the values of x before line plot
+    sort_axis = operator.itemgetter(0)
+    sorted_zip = sorted(zip(x, y_poly_pred), key=sort_axis)
+    x, y_poly_pred = zip(*sorted_zip)
     plt.gca().invert_xaxis()
 
-    plt.plot(newX, newY, "m-", linewidth=1, label="Polynomial Regression")
+    plt.plot(x, y_poly_pred, color='m')
+    plt.show()
 
 
 """## Second Algorithm - Ridge Lasso"""
