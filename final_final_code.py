@@ -151,8 +151,8 @@ def polynomial():
     # Plotting the poor model
     model_features = PolynomialFeatures(degree=2, include_bias=False)
     # Setting the parameters for the axis
-    plt.xticks(np.arange(min(x), max(x) + 1, 1.0))
-    plt.xticks(np.arange(0, 26, 2.5))
+    # plt.xticks(np.arange(min(x), max(x) + 1, 1.0))
+    # plt.xticks(np.arange(0, 26, 2.5))
 
     # Fit graph to x axis data
     xPoly = model_features.fit_transform(x)
