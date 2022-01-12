@@ -20,6 +20,7 @@ We used:
 
 ### Deep Neural Network (DNN)
 ![Imgur](https://i.imgur.com/FvU2wbt.png)
+
 For our DNN, we measured:
 <ul>
   <li> our metrics using “mae” </li>
